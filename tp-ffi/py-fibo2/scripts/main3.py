@@ -6,7 +6,10 @@ from matplotlib.backends.backend_gtk3agg import (
     FigureCanvasGTK3Agg as FigureCanvas)
 from matplotlib.figure import Figure
 import numpy as np
-
+import myfibo
+import matplotlib
+matplotlib.use('TkAgg')
+import matplotlib.pyplot as plt
 
 class Gui(Gtk.Window):
     
@@ -53,7 +56,16 @@ class Gui(Gtk.Window):
 
     def update_canvas(self, n):
         self.ax.clear()
-        # TODO plot fibo_iterative
+
+      
+        xs = np.arange(0 , n)
+        ys = np.vectorize(myfibo.fibo_iterative)(xs)
+
+        self.ax.plot(xs, ys)
+        self.ax.set(xlabel='i', ylabel='test_func(i)')
+        self.ax.grid()
+
+        plt.show()
         self.canvas.draw()
 
 
