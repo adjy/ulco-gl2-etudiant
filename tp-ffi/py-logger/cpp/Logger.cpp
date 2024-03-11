@@ -6,11 +6,15 @@
 #include <sstream>
 
 void Logger::addItem(Level l, const std::string & m) {
-  // TODO implement Logger::addItem
+  _items.push_back(std::make_tuple(l, m));
 }
 
 std::string Logger::reportByAdded() const {
-  // TODO Logger::reportByAdded
+  std::string str = "";
+
+  for(auto &item: _items){
+    //str += "[" + std::to_string(std::get<0>(item) )+ "]";
+  }
   return "TODO Logger::reportByAdded";
 }
 

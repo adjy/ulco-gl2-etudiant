@@ -2,16 +2,16 @@ import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import numpy as np
-
+import myfibo
 
 def test_func(x: int):
     return x*x
 
 
 if __name__ == '__main__':
-
-    xs = np.arange(-10, 11, 1)
-    ys = np.vectorize(test_func)(xs)
+    n = 10
+    xs = np.arange(0 , n)
+    ys = np.vectorize(myfibo.fibo_iterative)(xs)
 
     fig, ax = plt.subplots()
     ax.plot(xs, ys)
