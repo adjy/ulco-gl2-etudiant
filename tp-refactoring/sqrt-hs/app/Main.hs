@@ -1,7 +1,8 @@
 import Lib
 
-mynegate :: Double -> Double
-mynegate x = negate x
+mynegate :: Maybe Double -> Maybe Double
+mynegate Nothing = Nothing
+mynegate (Just x) =  Just (negate x)
 
 main :: IO ()
 main = do
@@ -9,4 +10,6 @@ main = do
     print $ mynegate $ mysqrt 1764
     print $ mynegate $ mysqrt (-1764)
 
+
+-- cabal run
     
