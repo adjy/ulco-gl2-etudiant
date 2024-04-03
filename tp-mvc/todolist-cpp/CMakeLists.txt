@@ -5,7 +5,8 @@ include_directories( include ) #tout ce qui est dans include on peut avoir acces
 # library
 add_library( todolist-cpp-lib
     src/todolist-cpp/Task.cpp
-    src/todolist-cpp/View.cpp )
+    src/todolist-cpp/View.cpp
+    src/todolist-cpp/Board.cpp )
 
 # executable
 add_executable( todolist-cpp-app
@@ -19,7 +20,8 @@ install( TARGETS todolist-cpp-app DESTINATION bin )
 add_executable( todolist-cpp-test
     test/todolist-cpp/Task-test.cpp
     test/main.cpp
-    test/todolist-cpp/View-test.cpp)
+    test/todolist-cpp/View-test.cpp
+    test/todolist-cpp/Board-test.cpp)
 target_link_libraries( todolist-cpp-test todolist-cpp-lib )
 enable_testing()
 add_test( NAME todolist-cpp-test COMMAND todolist-cpp-test )
