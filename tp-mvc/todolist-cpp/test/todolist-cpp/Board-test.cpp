@@ -42,3 +42,28 @@ TEST_CASE( "test addTodo 2" ) {
    
 }
 
+TEST_CASE( "Board toDone, 1" ) {
+    Board b;
+    b.addTodo("foo");
+    b.addTodo("bar");
+    b.toDone(2);
+    REQUIRE( b._todo.size() == 1 );
+    REQUIRE( b._done.size() == 1 );
+
+    Task t = b._todo.back();
+    REQUIRE( t._id == 1 );
+    REQUIRE( t._name == "foo" );
+    
+    Task t2 = b._done.back(); 
+    REQUIRE( t2._id == 2 );
+    REQUIRE( t2._name == "bar" );
+}
+
+TEST_CASE( "Board toDone, 2" ) {
+    Board b;
+    b.addTodo("foo");
+    b.addTodo("bar");
+    b.toDone(3);
+    REQUIRE( b._todo.size() == 2 );
+    REQUIRE( b._done.size() == 0 );
+}
