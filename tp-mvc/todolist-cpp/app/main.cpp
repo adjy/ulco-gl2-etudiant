@@ -1,11 +1,19 @@
 #include <todolist-cpp/Task.hpp>
-
+#include <todolist-cpp/Board.hpp>
+#include <todolist-cpp/View.hpp>
 #include <iostream>
 
 int main() {
 
-    Task t {1, "TODO"};
-    std::cout << t._name << std::endl;
+    Board b;
+    b.addTodo("foo");
+    b.addTodo("bar");
+
+    void printBoard(std::ostream &os, Board &b);
+
+    printBoard(std::cout, b);
+
+   
 
     return 0;
 }
