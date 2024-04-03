@@ -2,4 +2,9 @@
 
 #include <string>
 #include <todolist-cpp/Task.hpp>
-std::string showClass(const Task &t);
+#include <todolist-cpp/Board.hpp>
+
+
+std::string showTask(const Task &t);
+
+void printBoard(std::ostream &os, Board &b);
