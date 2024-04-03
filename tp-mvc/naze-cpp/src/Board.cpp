@@ -37,7 +37,23 @@ Cell Board::operator()(int i, int j) const {
 }
 
 void Board::tryGoLeft() {
-    _i++;
-    _j++;
-    // TODO
+    int newJ = _j - 1;
+    if(newJ < 0)
+        return;
+
+    if(_board[getI()][newJ] == Cell::Wall)
+        return;
+
+    _j--;
+}
+
+void Board::tryGoLeft() {
+    int newJ = _j - 1;
+    if(newJ < 0)
+        return;
+
+    if(_board[getI()][newJ] == Cell::Wall)
+        return;
+
+    _j--;
 }
