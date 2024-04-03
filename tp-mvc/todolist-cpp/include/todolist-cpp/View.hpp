@@ -7,4 +7,4 @@
 
 std::string showTask(const Task &t);
 
-void printBoard(std::ostream &os, Board &b);
+void printBoard(std::ostream &os, const Board &b);

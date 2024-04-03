@@ -5,7 +5,7 @@ std::string showTask(const Task &t){
     return std::to_string(t._id) + ". " + t._name;
 }
 
-void printBoard(std::ostream &os, Board &b){
+void printBoard(std::ostream &os, const Board &b){
     os << "Todo:"<<std::endl;
     for(auto bTask: b._todo)
         os<<showTask(bTask)<<std::endl;
