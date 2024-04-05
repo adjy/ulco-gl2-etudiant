@@ -2,14 +2,15 @@
 
 #include <list>
 #include <thread>
+#include <optional>
 
 class Net {
     private:
         std::list<WebSocketChannelPtr> _channels;
 
         // pour gérer les noms de client :
-        // std::list<WebSocketChannelPtr> _pendings;
-        // std::map<WebSocketChannelPtr, std::string> _connections;
+        std::list<WebSocketChannelPtr> _pendings;
+        std::map<WebSocketChannelPtr, std::string> _connections;
 
     public:
         Net() = default;
@@ -31,9 +32,23 @@ class Net {
         }
 
         // pour gérer les noms de client :
-        // bool giveName(const WebSocketChannelPtr& c, const std::string& n)
-        // bool isPending(const WebSocketChannelPtr& c) const
-        // std::optional<std::string> findName(const WebSocketChannelPtr& c) const
+        bool giveName(const WebSocketChannelPtr& c, const std::string& n){
+           
+            _connections.insert(std::make_pair(c,n));
+            return true;
+        }
+        bool isPending(const WebSocketChannelPtr& c) const{
+            auto it = std::find(_pendings.begin(), _pendings.end(), c);
+            if(it == _pendings.end())
+                return false;
+            return true;
+        }
+        // std::optional<std::string> findName(const WebSocketChannelPtr& c) const{
+        //     auto it = std::find(_connections.begin(), _connections.end(), c);
+        //     if(it != _connections.end())
+        //         return it->second;
+        //     return {};
+        // }
 
 };
 

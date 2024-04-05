@@ -19,7 +19,17 @@ int main(int argc, char** argv) {
     };
     ws.open("ws://127.0.0.1:9000");
 
+    std::string input;
+    std::cout << "enter messages:" << std::endl;
     while (true) {
+        std::getline(std::cin, input);
+        
+        if (input == "") {
+            ws.close();
+            break;
+        }
+
+        ws.send(input);
         std::this_thread::sleep_for(std::chrono::milliseconds(200));
     }
 
