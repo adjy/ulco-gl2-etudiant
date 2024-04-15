@@ -6,4 +6,4 @@ td/*.pdf
 *.egg-info
 *.so
 output.png
-
+doc/

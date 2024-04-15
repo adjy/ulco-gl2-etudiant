@@ -37,6 +37,7 @@ class Jeu {
         void raz();
 };
 
+/// \brief Retourne les infos du jeu, plus précisément la grille de jeu
 std::ostream & operator<<(std::ostream & os, const Jeu & jeu);
 
 #endif
