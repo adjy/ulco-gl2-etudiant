@@ -7,6 +7,7 @@ int main() {
     Status status = jeu.getStatus();
 
     std::cout<<jeu;
+
    /* while(status == Status::RougeJoue || status == Status::VertJoue){
         // Choisir un coup(i,j) ...
         jeu.jouer(i, j);

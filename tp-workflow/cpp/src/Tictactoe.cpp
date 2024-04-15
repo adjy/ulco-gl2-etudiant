@@ -39,21 +39,20 @@ bool Jeu::jouer(int i, int j) {
         return false;
     if(getCell(i, j) != Cell::Vide)
         return false;
-
     switch (getStatus()){
         case Status::RougeJoue:
             _plateau[i][j] = Cell::Rouge;
             _status = Status::VertJoue;
-            return true;
-            
+            break;
         case Status::VertJoue:
             _plateau[i][j] = Cell::Vert;
             _status = Status::RougeJoue;
-            return true;
+            break;
         default:
             break;
     }
-    return false;
+    win(i, j);
+    return true;
 }
 
 void Jeu::raz() {
@@ -61,5 +60,23 @@ void Jeu::raz() {
     for(unsigned int i = 0; i < 3; i++)
         for(unsigned int j = 0; j < 3; j++)
             _plateau[i][j] = Cell::Vide;
+}
+
+void Jeu::win(int i, int j){
+    Cell a = _plateau[i][j];
+
+    bool gagne = false;
+    // test Colonne
+    int i2 = i;
+    if(_plateau[((++i2)%3)][j] == a && _plateau[(++i2)%3] [j] == a)
+        gagne = true;
+
+    if(gagne){
+        if(a == Cell::Rouge)
+            _status = Status::RougeGagne;
+        else if(a == Cell::Vert)
+            _status = Status::VertGagne;
+    }    
+    
 }
 

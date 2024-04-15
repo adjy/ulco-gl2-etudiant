@@ -49,6 +49,17 @@ TEST_CASE("test jouer (2)") {
     REQUIRE(jeu.getCell(i, j) == Cell::Rouge );
     REQUIRE(jeu.jouer(i, j) == false );
     REQUIRE(Status::VertJoue == jeu.getStatus() );
+}
 
+TEST_CASE("Win colonne") { 
+    Jeu jeu;
+    jeu.jouer(0,0); // Rouge
+    jeu.jouer(0,1); // Vert
+    jeu.jouer(1,0); // Rouge
+    jeu.jouer(2,2); // Vert
+    jeu.jouer(2,0); // Rouge
+
+    REQUIRE(Status::RougeGagne == jeu.getStatus() );
+    
 }
 
