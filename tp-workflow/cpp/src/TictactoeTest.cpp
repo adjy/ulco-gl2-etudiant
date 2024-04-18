@@ -63,3 +63,40 @@ TEST_CASE("Win colonne") {
     
 }
 
+TEST_CASE("Win ligne") { 
+    Jeu jeu;
+    jeu.jouer(0,0); // Rouge
+    jeu.jouer(1,1); // Vert
+    jeu.jouer(2,2); // Rouge
+    jeu.jouer(1,2); // Vert
+    jeu.jouer(0,2); // Rouge
+    jeu.jouer(1,0); // Vert
+
+    REQUIRE(Status::VertGagne == jeu.getStatus() );
+}
+
+TEST_CASE("Win diag 1") { 
+    Jeu jeu;
+    jeu.jouer(0,0); // Rouge
+    jeu.jouer(0,1); // Vert
+    jeu.jouer(2,2); // Rouge
+    jeu.jouer(0,2); // Vert
+    jeu.jouer(1,1); // Rouge
+    jeu.jouer(1,0); // Rouge
+
+    REQUIRE(Status::RougeGagne == jeu.getStatus() );
+}
+
+TEST_CASE("Win diag 2") { 
+    Jeu jeu;
+    jeu.jouer(1,1); // Rouge
+    jeu.jouer(0,0); // Vert
+    jeu.jouer(0,2); // Rouge
+    jeu.jouer(2,2); // Vert
+    jeu.jouer(2,0); // Rouge
+
+    REQUIRE(Status::RougeGagne == jeu.getStatus() );
+}
+
+
+

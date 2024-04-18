@@ -65,18 +65,33 @@ void Jeu::raz() {
 void Jeu::win(int i, int j){
     Cell a = _plateau[i][j];
 
+    if(a == Cell::Vide)
+        return;
+
     bool gagne = false;
-    // test Colonne
-    int i2 = i;
-    if(_plateau[((++i2)%3)][j] == a && _plateau[(++i2)%3] [j] == a)
+    // Test Colonne
+    if (_plateau[(i + 1) % 3][j] == a && _plateau[(i + 2) % 3][j] == a)
         gagne = true;
+
+    // Test Ligne
+    if (_plateau[i][(j + 1) % 3] == a && _plateau[i][(j + 2) % 3] == a)
+        gagne = true;
+
+    // Test Diagonale 1
+    if (i == j && _plateau[(i + 1) % 3][(j + 1) % 3] == a && _plateau[(i + 2) % 3][(j + 2) % 3] == a)
+        gagne = true;
+
+    // Test Diagonale 2
+    if (i + j == 2 && _plateau[(i + 1) % 3][(j + 2) % 3] == a && _plateau[(i + 2) % 3][(j + 1) % 3] == a)
+        gagne = true;
+    
 
     if(gagne){
         if(a == Cell::Rouge)
             _status = Status::RougeGagne;
         else if(a == Cell::Vert)
             _status = Status::VertGagne;
-    }    
+    }        
     
 }
 
