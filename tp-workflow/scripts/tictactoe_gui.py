@@ -6,6 +6,8 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk
 
 class Gui(Gtk.Window):
+    status = None
+    jeu = None
 
     def saisir_un_coup(self):
         i, j = -1, -1
@@ -19,6 +21,9 @@ class Gui(Gtk.Window):
         return i, j
     
     def __init__(self):
+        self.jeu = tictactoe.Jeu()
+        self.status = self.jeu.getStatus().name
+
         super().__init__(title="Tictactoe")
         self.set_size_request (400, 400)
 
@@ -37,28 +42,32 @@ class Gui(Gtk.Window):
         hbox = Gtk.Box()
         vbox.pack_end(hbox, False, False, 0)
         # label
-        self.label = Gtk.Label(label="TODO")
+        self.label = Gtk.Label(label=self.status)
         hbox.pack_start(self.label, True, True, 0)
-        # TODO button1
+
+        # button1 (Rejouer)
+        button1 = Gtk.Button(label="Rejouer")
+        button1.connect("clicked", self.on_button1_clicked)
+        hbox.pack_start(button1, True, True, 0)
+
         # button2
         button2 = Gtk.Button(label="quitter")
         button2.connect("clicked", self.on_button2_clicked)
         hbox.pack_start(button2, True, True, 0)
 
-        jeu = tictactoe.Jeu()
-        status = jeu.getStatus()
+        
 
-        while status == tictactoe.Status.RougeJoue or status == tictactoe.Status.VertJoue:
-            print(jeu)
-            i, j = self.saisir_un_coup()
-            jeu.jouer(i, j)
-            status = jeu.getStatus()
+        # while status == tictactoe.Status.RougeJoue or status == tictactoe.Status.VertJoue:
+        #     print(jeu)
+        #     i, j = self.saisir_un_coup()
+        #     jeu.jouer(i, j)
+        #     status = jeu.getStatus()
 
-        if jeu.getStatus() == tictactoe.Status.Egalite:
-            print("La partie est nulle")
-        else:
-            gagnant = "vert" if jeu.getStatus() == tictactoe.Status.VertGagne else "rouge"
-            print(f"{gagnant.capitalize()} a gagné")
+        # if jeu.getStatus() == tictactoe.Status.Egalite:
+        #     print("La partie est nulle")
+        # else:
+        #     gagnant = "vert" if jeu.getStatus() == tictactoe.Status.VertGagne else "rouge"
+        #     print(f"{gagnant.capitalize()} a gagné")
 
     def on_draw(self, widget, context):
 
@@ -85,8 +94,7 @@ class Gui(Gtk.Window):
             
 
     def on_button1_clicked(self, widget):
-        # TODO on_button1_clicked
-        print('TODO on_button1_clicked')
+        self.jeu.raz()
         self.drawingarea.queue_draw()
 
     def on_button2_clicked(self, widget):
