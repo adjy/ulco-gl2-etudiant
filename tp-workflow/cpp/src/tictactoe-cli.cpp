@@ -30,16 +30,26 @@ int main() {
     Jeu jeu;
     Status status = jeu.getStatus();
 
-    std::cout<<jeu;
+    
 
 
     while(status == Status::RougeJoue || status == Status::VertJoue){
-        // Choisir un coup(i,j) ...
+        std::cout<<jeu;
         int i, j;
         saisirUnCoup(i, j);
         std::cout<<i<<" "<< j<< std::endl;
-       //jeu.jouer(i, j);
+        jeu.jouer(i, j);
         status = jeu.getStatus();
+    }
+
+    if(jeu.getStatus() == Status::Egalite)
+        std::cout<< "La partie est nulle"<<std::endl;
+    else{
+        std::string winner = "vert";
+        if(jeu.getStatus() == Status::RougeGagne)
+            winner = "rouge";
+
+        std::cout<< winner +" a gagne";
     }
    
 
