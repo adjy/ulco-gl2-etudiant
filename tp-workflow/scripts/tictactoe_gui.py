@@ -70,21 +70,31 @@ class Gui(Gtk.Window):
         #     print(f"{gagnant.capitalize()} a gagné")
 
     def on_draw(self, widget, context):
-
-        # TODO on_draw
         
         width = widget.get_allocated_width()
         height = widget.get_allocated_height()
 
-        context.set_source_rgb(0, 0, 0)
-        context.rectangle(0, 0, 100, 100)
-        context.fill()
-
+        for i in range(3):
+            for j in range(3):
+                x = i * width / 3
+                y = j * height / 3
+                rect_width = width / 3
+                rect_height = height / 3
+                context.rectangle(x, y, rect_width, rect_height)
+                context.fill()
+        # Pour les lignes qui separent les carres
         context.set_source_rgb(0.5, 0.5, 0.5)
         context.set_line_width(3)
-        context.move_to(width, 0)
-        context.line_to(0, height)
-        context.stroke()
+        for i in range(1, 3):
+            context.move_to(0, i * height / 3)
+            context.line_to(width, i * height / 3)
+            context.stroke()
+        
+            context.move_to(i * width / 3, 0)
+            context.line_to(i * width / 3, height)
+            context.stroke()
+
+        
 
 
     def on_area_button_press(self, widget, event):
