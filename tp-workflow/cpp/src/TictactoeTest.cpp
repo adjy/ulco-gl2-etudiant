@@ -98,5 +98,23 @@ TEST_CASE("Win diag 2") {
     REQUIRE(Status::RougeGagne == jeu.getStatus() );
 }
 
+TEST_CASE("Egalite") {
+    Jeu jeu;
+    jeu.jouer(0, 0); // Rouge
+    jeu.jouer(0, 2); // Vert
+    jeu.jouer(0, 1); // Rouge
+    jeu.jouer(1, 0); // Vert
+    jeu.jouer(1, 2); // Rouge
+    jeu.jouer(1, 1); // Vert
+    jeu.jouer(2, 0); // Rouge
+    jeu.jouer(2, 1); // Vert
+    jeu.jouer(2, 2); // Rouge
+
+ 
+
+    REQUIRE(Status::Egalite == jeu.getStatus());
+}
+
+
 
 

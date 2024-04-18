@@ -13,7 +13,8 @@ class Jeu {
     private:
         std::array<std::array<Cell, 3>, 3> _plateau;
         Status _status;
-        void win(int i, int j);
+        bool win(int i, int j);
+        bool egalite();
 
     public:
         ///@brief Constructeur.

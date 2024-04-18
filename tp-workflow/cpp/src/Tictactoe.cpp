@@ -39,7 +39,9 @@ bool Jeu::jouer(int i, int j) {
         return false;
     if(getCell(i, j) != Cell::Vide)
         return false;
+    
     switch (getStatus()){
+      
         case Status::RougeJoue:
             _plateau[i][j] = Cell::Rouge;
             _status = Status::VertJoue;
@@ -51,7 +53,12 @@ bool Jeu::jouer(int i, int j) {
         default:
             break;
     }
-    win(i, j);
+    
+    if(!win(i, j)){
+        egalite();
+    }
+        
+   
     return true;
 }
 
@@ -62,11 +69,10 @@ void Jeu::raz() {
             _plateau[i][j] = Cell::Vide;
 }
 
-void Jeu::win(int i, int j){
+bool Jeu::win(int i, int j){
     Cell a = _plateau[i][j];
-
     if(a == Cell::Vide)
-        return;
+        return false;
 
     bool gagne = false;
     // Test Colonne
@@ -84,14 +90,35 @@ void Jeu::win(int i, int j){
     // Test Diagonale 2
     if (i + j == 2 && _plateau[(i + 1) % 3][(j + 2) % 3] == a && _plateau[(i + 2) % 3][(j + 1) % 3] == a)
         gagne = true;
-    
 
     if(gagne){
         if(a == Cell::Rouge)
             _status = Status::RougeGagne;
         else if(a == Cell::Vert)
             _status = Status::VertGagne;
-    }        
+    }  
+
+    return gagne;      
     
 }
 
+bool Jeu::egalite() {
+    bool grillePleine = true;
+
+    for (unsigned int i = 0; i < 3; i++) {
+        for(unsigned int j = 0; j < 3; j++) {
+            if(_plateau[i][j] == Cell::Vide) {
+                grillePleine = false;
+                break; 
+            }
+        }
+        if (!grillePleine)
+            break;
+    }
+
+    if (grillePleine && getStatus() != Status::RougeGagne && getStatus() != Status::VertGagne) {
+        _status = Status::Egalite;
+        return true;
+    }
+    return false;
+}
