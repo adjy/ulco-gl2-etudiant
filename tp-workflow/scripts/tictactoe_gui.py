@@ -98,9 +98,22 @@ class Gui(Gtk.Window):
 
 
     def on_area_button_press(self, widget, event):
-        # TODO on_area_button_press
-        if event.button == 1:
-            print('TODO on_area_button_press')
+        if event.button == 1: 
+          
+            x, y = event.x, event.y
+           
+            width = widget.get_allocated_width()
+            height = widget.get_allocated_height()
+            
+            i = int(x / (width / 3))
+            j = int(y / (height / 3))
+            print(i)
+            print(j)
+            
+            if self.jeu.jouer(i, j):  
+                self.drawingarea.queue_draw()
+                self.status = self.jeu.getStatus().name
+                self.label.set_label(self.status)
             
 
     def on_button1_clicked(self, widget):
