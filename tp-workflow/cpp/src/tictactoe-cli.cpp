@@ -24,14 +24,9 @@ void saisirUnCoup(int& i, int& j) {
         }
     }
 
-
-
 int main() {
     Jeu jeu;
     Status status = jeu.getStatus();
-
-    
-
 
     while(status == Status::RougeJoue || status == Status::VertJoue){
         std::cout<<jeu;
